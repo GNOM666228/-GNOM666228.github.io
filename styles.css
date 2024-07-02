@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #f50000; /* Белый текст на черном фоне */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.product {
+    background-color: #ffffffab; /* Серебристый цвет для товара */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 15px;
+    padding: 15px;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product:hover {
+    transform: translateY(-5px); /* Анимация подъема товара при наведении */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.info {
+    padding: 10px;
+}
+
+.info h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 14px;
+    color: #333; /* Цвет текста для описания товара */
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.quantity {
+    margin-top: 10px;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+button {
+    background-color: #ff0000; /* Желтый цвет для кнопок */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #ffd633; /* Измененный цвет при наведении */
+    transform: scale(1.1); /* Увеличение размера кнопки при наведении */
+}
+
+button:active {
+    background-color: #ffbf00; /* Измененный цвет при активации */
+    transform: translateY(1px);
+}
+
+.cart {
+    background-color: #000; /* Черный фон для корзины */
+    color: #fff; /* Белый текст для корзины */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.cart h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-items li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
