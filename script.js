@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const products = document.querySelectorAll('.product');
     const cartItems = document.querySelector('.cart-items');
     const totalElement = document.querySelector('.total');
+    const checkoutButton = document.getElementById('checkout-btn');
     let totalAmount = 0;
+    let cart = []; // Массив для хранения выбранных товаров
 
     products.forEach(product => {
         const price = parseFloat(product.getAttribute('data-price'));
@@ -32,9 +34,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    checkoutButton.addEventListener('click', function() {
+        if (cart.length === 0) {
+            alert('Добавьте товары в корзину перед оформлением заказа.');
+            return;
+        }
+
+        // Подготовка данных о корзине для отправки
+        const orderData = prepareOrderData();
+
+        // Отправка данных на сервер (в данном примере просто выводим в консоль)
+        console.log('Данные о заказе:', orderData);
+
+        // Здесь можно добавить логику для отправки данных на сервер и получения ссылки на оплату
+        const checkoutMessage = "Вы готовы оформить заказ? Перейдите по ссылке для оплаты: https://example.com/checkout";
+        alert(checkoutMessage); // Замените на реальный механизм отправки сообщений пользователю через Telegram
+    });
+
     function addToCart(product, quantity, price) {
         const productName = product.querySelector('h2').innerText;
         const itemPrice = price * quantity;
+
+        // Добавление товара в массив корзины
+        const cartItem = {
+            name: productName,
+            quantity: quantity,
+            price: itemPrice
+        };
+        cart.push(cartItem);
 
         // Проверяем, есть ли уже такой товар в корзине
         let existingItem = cartItems.querySelector(`li[data-product="${productName}"]`);
@@ -42,12 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
             existingItem.querySelector('.quantity-text').innerText = quantity;
             existingItem.querySelector('.item-price').innerText = `$${itemPrice.toFixed(2)}`;
         } else {
-            const cartItem = document.createElement('li');
-            cartItem.setAttribute('data-product', productName);
-            cartItem.innerHTML = `
+            const cartItemElement = document.createElement('li');
+            cartItemElement.setAttribute('data-product', productName);
+            cartItemElement.innerHTML = `
                 ${productName} - <span class="quantity-text">${quantity}</span> шт. - <span class="item-price">$${itemPrice.toFixed(2)}</span>
             `;
-            cartItems.appendChild(cartItem);
+            cartItems.appendChild(cartItemElement);
         }
         updateTotal();
     }
@@ -55,6 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateCartItem(product, quantity) {
         const productName = product.querySelector('h2').innerText;
         const itemPrice = parseFloat(product.getAttribute('data-price')) * quantity;
+
+        // Обновляем данные товара в массиве корзины
+        cart.forEach(item => {
+            if (item.name === productName) {
+                item.quantity = quantity;
+                item.price = itemPrice;
+            }
+        });
 
         let existingItem = cartItems.querySelector(`li[data-product="${productName}"]`);
         if (existingItem) {
@@ -69,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let existingItem = cartItems.querySelector(`li[data-product="${productName}"]`);
         if (existingItem) {
             cartItems.removeChild(existingItem);
+
+            // Удаление товара из массива корзины
+            cart = cart.filter(item => item.name !== productName);
         }
         updateTotal();
     }
@@ -81,5 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
             total += itemPrice;
         });
         totalElement.innerText = `Общая сумма: $${total.toFixed(2)}`;
+    }
+
+    function prepareOrderData() {
+        const orderData = cart.map(item => {
+            return {
+                name: item.name,
+                quantity: item.quantity,
+                price: item.price
+            };
+        });
+        return orderData;
     }
 });
