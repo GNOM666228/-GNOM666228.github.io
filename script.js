@@ -58,29 +58,24 @@ document.addEventListener('DOMContentLoaded', function() {
         // Подготовка данных о корзине для отправки
         const orderData = prepareOrderData();
 
-        // Расчет общей суммы для оплаты
-        const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
-
         // Создание и отображение всплывающего окна с суммой оплаты
-        Telegram.WebApp.showPopup({
-            title: "Оформление заказа",
-            message: `Общая сумма для оплаты: $${totalPrice.toFixed(2)}`,
-            buttons: [
-                { id: 'pay', type: 'ok', text: 'Оплатить' },
-                { id: 'cancel', type: 'cancel', text: 'Отмена' }
-            ]
+        TelegramWebApp.openPaymentForm({
+            payload: 'payload',
+            provider_token: 'YOUR_PAYMENT_PROVIDER_TOKEN',
+            start_parameter: 'test-start',
+            prices: orderData.map(item => ({ label: item.name, amount: item.price }))
         });
 
-        // Обработка нажатия кнопки в всплывающем окне
-        Telegram.WebApp.onEvent('popupClosed', function(event) {
-            if (event.button_id === 'pay') {
-                // Отправка команды /buy в Telegram для создания инвойса
-                Telegram.WebApp.sendData(JSON.stringify(orderData));
-            }
+        // Обработка успешной оплаты
+        TelegramWebApp.onPaymentSuccessful((payment) => {
+            // Очистка корзины и обновление интерфейса
+            cart = [];
+            cartItems.innerHTML = '';
+            totalElement.innerText = 'Общая сумма: $0';
+            
+            // Отправка сообщения о успешной оплате в Telegram
+            alert('Спасибо за оплату! Ваш заказ будет обработан.');
         });
-
-        // Закрытие Mini App
-        Telegram.WebApp.close();
     });
 
     function addToCart(product, quantity, price) {
