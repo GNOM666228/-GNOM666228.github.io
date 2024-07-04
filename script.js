@@ -130,7 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateTotal() {
         const totalPrice = calculateTotalPrice();
-        totalElement.innerText = `Общая сумма: $${totalPrice.toFixed(2)}`;
+        if (totalPrice === 0) {
+            totalElement.innerText = 'Общая сумма: $0';
+        } else {
+            totalElement.innerText = `Общая сумма: $${totalPrice.toFixed(2)}`;
+        }
     }
 
     function calculateTotalPrice() {
