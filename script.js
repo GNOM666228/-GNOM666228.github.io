@@ -178,3 +178,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
     }
 });
+TelegramWebApp.sendToTelegram({
+    data: JSON.stringify(orderData),
+    shopId: '506751',
+    shopArticleId: '538350',
+    onSuccess: function(response) {
+        // Обработка успешной отправки данных в Telegram
+    },
+    onError: function(error) {
+        // Обработка ошибки
+    }
+});
