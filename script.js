@@ -60,11 +60,16 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        const confirmation = confirm(`Общая сумма заказа: $${totalPrice.toFixed(2)}. Желаете продолжить оформление?`);
+        if (!confirmation) {
+            return;
+        }
+
         const orderData = prepareOrderData();
 
         TelegramWebApp.openPaymentForm({
             payload: 'payload',
-            provider_token: 'YOUR_PAYMENT_PROVIDER_TOKEN',
+            provider_token: '381764678:TEST:89085', // Ваш тестовый токен провайдера
             start_parameter: 'test-start',
             prices: orderData.map(item => ({ label: item.name, amount: item.price }))
         });
