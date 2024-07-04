@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const orderData = prepareOrderData();
 
     // Отправка запроса боту о подтверждении
-    fetch('/path/to/your/telegram/bot/api', {
+    fetch('https://api.telegram.org/bot<6552303498:AAGmTw8WEoMy1Zwfjv0Yh8sbOHvTn5b5Pj0>/sendInvoice', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
