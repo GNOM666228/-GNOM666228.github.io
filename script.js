@@ -53,16 +53,48 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Добавьте товары в корзину перед оформлением заказа.');
             return;
         }
+    
+        const totalPrice = calculateTotalPrice();
+        if (totalPrice === 0) {
+            alert('Добавьте товары в корзину перед оформлением заказа.');
+            return;
+        }
+    
+        const confirmation = confirm(`Общая сумма заказа: $${totalPrice.toFixed(2)}. Желаете продолжить оформление?`);
+        if (!confirmation) {
+            return;
+        }
+    
+        const orderData = prepareOrderData();
+    
+        // Отправка данных в Telegram Web приложение для открытия окна оплаты
+        TelegramWebApp.sendToTelegram({
+            data: JSON.stringify(orderData),
+            onSuccess: function(response) {
+                if (response.success) {
+                    // Открываем окно для оплаты в Telegram Web
+                    TelegramWebApp.openPaymentForm({
+                        payload: 'payload',
+                        provider_token: '381764678:TEST:89085', // Ваш тестовый токен провайдера
+                        start_parameter: 'test-start',
+                        prices: orderData.map(item => ({ label: item.name, amount: item.price }))
+                    });
 
-        // Формируем данные для отправки в web приложение Telegram
-        const orderData = cart.map(item => ({
-            name: item.name,
-            price: item.price
-        }));
-
-        // Отправляем данные в web приложение Telegram
-        TelegramWebApp.sendToWebApp({
-            data: JSON.stringify(orderData)
+                    // Обработка успешной оплаты
+                    TelegramWebApp.onPaymentSuccessful((payment) => {
+                        cart = [];
+                        cartItems.innerHTML = '';
+                        updateTotal();
+                        alert('Спасибо за оплату! Ваш заказ будет обработан.');
+                    });
+                } else {
+                    alert('Произошла ошибка при обработке заказа.');
+                }
+            },
+            onError: function(error) {
+                console.error('Ошибка при отправке данных в Telegram:', error);
+                alert('Произошла ошибка при обработке заказа.');
+            }
         });
     });
 
@@ -128,5 +160,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function calculateTotalPrice() {
         return cart.reduce((total, item) => total + item.price, 0);
+    }
+
+    function prepareOrderData() {
+        return cart.map(item => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price
+        }));
     }
 });
