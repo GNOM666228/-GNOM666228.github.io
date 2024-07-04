@@ -57,23 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Подготовка данных о корзине для отправки
         const orderData = prepareOrderData();
 
-        // Создание и отображение всплывающего окна с суммой оплаты
-        Telegram.WebApp.showPopup({
-            title: "Оформление заказа",
-            message: `Общая сумма для оплаты: $${totalPrice.toFixed(2)}`,
-            buttons: [
-                { id: 'pay', type: 'ok', text: 'Оплатить' },
-                { id: 'cancel', type: 'cancel', text: 'Отмена' }
-            ]
-        });
-
-        // Обработка нажатия кнопки в всплывающем окне
-        Telegram.WebApp.onEvent('popupClosed', function(event) {
-            if (event.button_id === 'pay') {
-                // Отправка команды /buy в Telegram для создания инвойса
-                Telegram.WebApp.sendData(JSON.stringify(orderData));
-            }
-        });
+        // Отправка данных в Telegram для создания инвойса
+        Telegram.WebApp.sendData(JSON.stringify(orderData));
     });
 
     function addToCart(product, quantity, price) {
