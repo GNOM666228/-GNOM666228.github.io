@@ -89,16 +89,23 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         const tg = window.Telegram.WebApp;
-        let url = '381764678:TEST:89085';
+        const checkoutButton = document.getElementById('checkout-btn');
+        const cartItems = document.querySelector('.cart-items');
+        const totalAmountElement = document.querySelector('.total');
 
-        var data = JSON.stringify({
-            // Данные для отправки на сервер, если необходимо
-        });
+        let url = '506751';
 
-        tg.MainButton.show();
-        tg.MainButton.setText("Оплатить");
-        tg.MainButton.onClick(() => {
-            console.log("start");
+        checkoutButton.addEventListener('click', () => {
+            // Получаем общую сумму из корзины
+            let totalAmount = calculateTotalAmount();
+
+            // Формируем данные для отправки на сервер
+            var data = JSON.stringify({
+                amount: totalAmount
+                // Другие данные, если необходимо
+            });
+
+            // Отправляем запрос на сервер
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
@@ -110,8 +117,32 @@
             xhr.send(data);
         });
 
+        // Функция для вычисления общей суммы в корзине
+        function calculateTotalAmount() {
+            let total = 0;
+            cartItems.querySelectorAll('li').forEach(item => {
+                let price = parseFloat(item.dataset.price);
+                let quantity = parseInt(item.querySelector('.quantity-input').value);
+                total += price * quantity;
+            });
+            return total;
+        }
+
+        // Пример добавления товаров в корзину (можете настроить под свою реализацию)
+        function addToCart(product) {
+            // Добавление товара в корзину и обновление интерфейса
+            // Например:
+            // let item = document.createElement('li');
+            // item.dataset.price = product.price;
+            // item.textContent = product.name + ' - ' + product.price;
+            // cartItems.appendChild(item);
+        }
+
+        // Пример использования функции добавления в корзину
+        addToCart({ name: 'Тестостерон буст', price: 10 });
+
+        // Дополнительные функции и обработчики событий
     </script>
-    
     
     <script src="script.js"></script>
 </body>
