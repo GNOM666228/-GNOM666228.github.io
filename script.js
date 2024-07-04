@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const quantityInput = product.querySelector('.quantity-input');
         const addButton = product.querySelector('.plus');
         const minusButton = product.querySelector('.minus');
+        const detailsBtn = product.querySelector('.details-btn');
+        const details = product.querySelector('.details');
+        const hideBtn = product.querySelector('.hide-btn');
 
         addButton.addEventListener('click', function() {
             let currentValue = parseInt(quantityInput.value);
@@ -32,6 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 removeCartItem(product);
             }
         });
+
+        detailsBtn.addEventListener('click', function() {
+            details.style.display = 'block';
+            hideBtn.style.display = 'block';
+            detailsBtn.style.display = 'none';
+        });
+
+        hideBtn.addEventListener('click', function() {
+            details.style.display = 'none';
+            hideBtn.style.display = 'none';
+            detailsBtn.style.display = 'block';
+        });
     });
 
     checkoutButton.addEventListener('click', function() {
@@ -46,9 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Отправка данных на сервер (в данном примере просто выводим в консоль)
         console.log('Данные о заказе:', orderData);
 
-        // Здесь можно добавить логику для отправки данных на сервер и получения ссылки на оплату
-        const checkoutMessage = "Вы готовы оформить заказ? Перейдите по ссылке для оплаты: https://example.com/checkout";
-        alert(checkoutMessage); // Замените на реальный механизм отправки сообщений пользователю через Telegram
+        // Отправка команды /buy в Telegram
+        Telegram.WebApp.sendData(JSON.stringify(orderData));
+        Telegram.WebApp.close();
     });
 
     function addToCart(product, quantity, price) {
