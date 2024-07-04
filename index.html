@@ -80,28 +80,45 @@
     <div class="cart">
         <h2>Корзина</h2>
         <ul class="cart-items">
-            <!-- Здесь будут добавляться товары -->
+            <!-- Здесь будут добавляться выбранные товары -->
         </ul>
         <p class="total">Общая сумма: $0</p>
         <button id="checkout-btn">Оформить заказ</button>
     </div>
     
-    <script src="https://telegram.org/js/telegram-web-app.js"> const tg = window.Telegram.WebApp;</script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <script src="script.js">tg.MainButton.show();
+    <script>
+        const tg = window.Telegram.WebApp;
+
+        // Настройка кнопки "Оформить заказ"
+        tg.MainButton.show();
         tg.MainButton.setText("Оплатить");
         tg.MainButton.onClick(() => {
-            console.log("start");
+            // Здесь можно отправить данные на сервер и открыть инвойс
+            console.log("Нажата кнопка оплаты");
+
+            // Пример запроса на сервер
             var xhr = new XMLHttpRequest();
+            var url = 'https://your-server.com/payment'; // URL вашего сервера для обработки платежа
+            var requestData = {
+                items: [
+                    { name: "Тестостерон буст", price: 10 },
+                    // Добавьте другие товары аналогично
+                ]
+            };
+
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("X-Custom-Info", "getOpenInvoiceUrl");
+
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    tg.openInvoice(xhr.responseText);
+                    tg.openInvoice(xhr.responseText); // Открытие инвойса после успешного ответа от сервера
                 }
             };
-            xhr.send();
-        });</script>
+
+            xhr.send(JSON.stringify(requestData));
+        });
+    </script>
 </body>
 </html>
