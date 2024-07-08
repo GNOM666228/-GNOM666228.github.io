@@ -9,16 +9,16 @@ body {
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 20px;
 }
 
 .product {
     background-color: #ffffffab; /* Серебристый цвет для товара */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    margin: 15px;
-    padding: 15px;
-    width: 300px;
+    margin: 10px;
+    padding: 10px;
+    width: 150px; /* Уменьшенная ширина для маленьких окон */
     text-align: center;
     border-radius: 10px;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -36,22 +36,22 @@ body {
 }
 
 .info {
-    padding: 10px;
+    padding: 5px;
 }
 
 .info h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 14px; /* Уменьшенный размер текста */
+    margin-bottom: 5px;
 }
 
 .info p {
-    font-size: 14px;
-    color: #333; /* Цвет текста для описания товара */
-    margin-bottom: 15px;
+    font-size: 12px; /* Уменьшенный размер текста для описания товара */
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .price {
-    font-size: 16px;
+    font-size: 14px; /* Уменьшенный размер текста */
     font-weight: bold;
 }
 
@@ -60,7 +60,7 @@ body {
 }
 
 .quantity-input {
-    width: 50px;
+    width: 40px; /* Уменьшенный размер для поля ввода количества */
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -69,14 +69,14 @@ body {
 }
 
 button {
-    background-color: #ff0000; /* Желтый цвет для кнопок */
+    background-color: #ff0000; /* Красный цвет для кнопок */
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 16px; /* Уменьшенные отступы */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px; /* Уменьшенный размер текста */
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
@@ -122,6 +122,7 @@ button:active {
     font-weight: bold;
     margin-top: 10px;
 }
+
 .product .details-btn,
 .product .hide-btn {
     display: block;
