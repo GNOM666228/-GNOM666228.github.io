@@ -68,7 +68,9 @@ body {
     margin: 0 5px;
 }
 
-button {
+button,
+.details-btn,
+.hide-btn {
     background-color: #ff0000; /* Желтый цвет для кнопок */
     color: #fff;
     border: none;
@@ -83,12 +85,16 @@ button {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-button:hover {
+button:hover,
+.details-btn:hover,
+.hide-btn:hover {
     background-color: #ffd633; /* Измененный цвет при наведении */
     transform: scale(1.1); /* Увеличение размера кнопки при наведении */
 }
 
-button:active {
+button:active,
+.details-btn:active,
+.hide-btn:active {
     background-color: #ffbf00; /* Измененный цвет при активации */
     transform: translateY(1px);
 }
@@ -121,16 +127,6 @@ button:active {
     font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
-}
-.product .details-btn,
-.product .hide-btn {
-    display: block;
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
 }
 
 .product .details {
