@@ -95,14 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateTotal();
                 alert('Спасибо за оплату! Ваш заказ будет обработан.');
             });
-        } else {
-            alert('Произошла ошибка при обработке заказа.');
+        
         }
     })
-    .catch(error => {
-        console.error('Ошибка при отправке запроса:', error);
-        alert('Произошла ошибка при обработке заказа.');
-    });
 });
 
 
@@ -190,26 +185,10 @@ TelegramWebApp.sendToTelegram({
     }
 });
 checkoutButton.addEventListener('click', function() {
-    if (cart.length === 0) {
-        alert('Добавьте товары в корзину перед оформлением заказа.');
-        return;
-    }
-
     const totalPrice = calculateTotalPrice();
-    if (totalPrice === 0) {
-        alert('Добавьте товары в корзину перед оформлением заказа.');
-        return;
-    }
-
     const orderData = prepareOrderData();
 
-    // Send cart data to Telegram bot
+    // Отправка данных корзины в Telegram бот
     Telegram.WebApp.sendData(JSON.stringify(orderData));
-
-    const confirmation = confirm(`Общая сумма заказа: $${totalPrice.toFixed(2)}. Желаете продолжить оформление?`);
-    if (!confirmation) {
-        return;
-    }
-
-    // Further logic for payment can go here
 });
+
