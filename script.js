@@ -188,7 +188,11 @@ checkoutButton.addEventListener('click', function() {
     const totalPrice = calculateTotalPrice();
     const orderData = prepareOrderData();
 
+    // Проверка данных перед отправкой
+    console.log("Отправка данных корзины в бот:", orderData);
+
     // Отправка данных корзины в Telegram бот
     Telegram.WebApp.sendData(JSON.stringify(orderData));
 });
+
 
