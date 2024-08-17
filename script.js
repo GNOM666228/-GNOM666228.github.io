@@ -184,15 +184,31 @@ TelegramWebApp.sendToTelegram({
         // Обработка ошибки
     }
 });
-checkoutButton.addEventListener('click', function() {
-    const totalPrice = calculateTotalPrice();
-    const orderData = prepareOrderData();
+checkoutButton.addEventListener('click', () => {
+    let cart = [];
 
-    // Проверка данных перед отправкой
-    console.log("Отправка данных корзины в бот:", orderData);
+    cartItems.querySelectorAll('li').forEach(item => {
+        let name = item.querySelector('.product-name').textContent;
+        let price = parseFloat(item.dataset.price);
+        let quantity = parseInt(item.querySelector('.quantity-input').value);
 
-    // Отправка данных корзины в Telegram бот
-    Telegram.WebApp.sendData(JSON.stringify(orderData));
+        if (quantity > 0) {
+            cart.push({ name, price, quantity });
+        }
+    });
+
+    if (cart.length > 0) {
+        const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const data = {
+            cart: cart,
+            totalAmount: totalAmount
+        };
+
+        // Отправка данных корзины в Telegram бот
+        Telegram.WebApp.sendData(JSON.stringify(data));
+    } else {
+        alert("Ваша корзина пуста!");
+    }
 });
 
 
