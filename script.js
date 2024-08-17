@@ -189,3 +189,27 @@ TelegramWebApp.sendToTelegram({
         // Обработка ошибки
     }
 });
+checkoutButton.addEventListener('click', function() {
+    if (cart.length === 0) {
+        alert('Добавьте товары в корзину перед оформлением заказа.');
+        return;
+    }
+
+    const totalPrice = calculateTotalPrice();
+    if (totalPrice === 0) {
+        alert('Добавьте товары в корзину перед оформлением заказа.');
+        return;
+    }
+
+    const orderData = prepareOrderData();
+
+    // Send cart data to Telegram bot
+    Telegram.WebApp.sendData(JSON.stringify(orderData));
+
+    const confirmation = confirm(`Общая сумма заказа: $${totalPrice.toFixed(2)}. Желаете продолжить оформление?`);
+    if (!confirmation) {
+        return;
+    }
+
+    // Further logic for payment can go here
+});
