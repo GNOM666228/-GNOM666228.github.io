@@ -95,27 +95,35 @@
 
         let url = 'https://api.telegram.org/bot<6552303498:AAGmTw8WEoMy1Zwfjv0Yh8sbOHvTn5b5Pj0>/sendInvoice';
 
+        
+
         checkoutButton.addEventListener('click', () => {
-            // Получаем общую сумму из корзины
-            let totalAmount = calculateTotalAmount();
+        let cart = [];
 
-            // Формируем данные для отправки на сервер
-            var data = JSON.stringify({
-                amount: totalAmount
-                // Другие данные, если необходимо
-            });
+        cartItems.querySelectorAll('li').forEach(item => {
+            let name = item.querySelector('.product-name').textContent;
+            let price = parseFloat(item.dataset.price);
+            let quantity = parseInt(item.querySelector('.quantity-input').value);
+        
+        if (quantity > 0) {
+            cart.push({ name, price, quantity });
+        }
+    });
 
-            // Отправляем запрос на сервер
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    tg.openInvoice(xhr.responseText);
-                }
-            };
-            xhr.send(data);
-        });
+    if (cart.length > 0) {
+        const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const data = {
+            cart: cart,
+            totalAmount: totalAmount
+        };
+
+        // Отправка данных корзины в Telegram бот
+        Telegram.WebApp.sendData(JSON.stringify(data));
+    } else {
+        alert("Ваша корзина пуста!");
+    }
+});
+
 
         // Функция для вычисления общей суммы в корзине
         function calculateTotalAmount() {
