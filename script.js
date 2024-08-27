@@ -66,45 +66,22 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const orderData = prepareOrderData();  // Подготовка данных
+        const orderData = prepareOrderData();
 
-        // Отправка данных в Telegram бот
-        console.log("Order Data:", orderData);  // Добавьте это для проверки
-        Telegram.WebApp.sendData(JSON.stringify(orderData));  // Отправляем данные в бот
+        // Проверка и отправка данных в Telegram бот
+        try {
+            console.log("Order Data:", orderData);  // Отображаем данные в консоли
+            Telegram.WebApp.sendData(JSON.stringify(orderData));  // Отправляем данные в бот
+            alert('Данные о заказе отправлены в Telegram. Ожидайте сообщения от бота.');
+        } catch (error) {
+            console.error("Ошибка отправки данных в Telegram:", error);
+            alert('Произошла ошибка при отправке данных в Telegram.');
+        }
 
-
-        // Отправка данных корзины в Telegram бот
-        Telegram.WebApp.sendData(JSON.stringify(orderData));  // Отправляем данные в бот
-
-        // Вывод уведомления об успешной отправке
-        alert('Данные о заказе отправлены в Telegram. Ожидайте сообщения от бота.');
-
-        // Если планируете использовать встроенную оплату, вы можете открыть форму инвойса в Telegram
-        Telegram.WebApp.openInvoice({
-            title: "Оплата заказа",
-            description: "Оплата товаров из вашей корзины",
-            payload: "custom-payload",
-            provider_token: "381764678:TEST:89085", // Замените на свой тестовый или боевой токен
-            currency: "USD",
-            prices: orderData.map(item => ({ label: item.name, amount: item.price })),  // Приводим цену в нужный формат (цены в центах)
-        });
-
-        // Обработка успешной оплаты
-        Telegram.WebApp.onPaymentSuccessful(function(payment) {
-            cart = [];
-            cartItems.innerHTML = '';
-            updateTotal();
-            alert('Спасибо за оплату! Ваш заказ будет обработан.');
-        });
-
-        // Обработка ошибки при оплате
-        Telegram.WebApp.onPaymentError(function(error) {
-            alert('Произошла ошибка при оплате. Попробуйте снова.');
-        });
+        // Очистка корзины
+        cart = [];
+        updateCartUI();
     });
-    console.log("Telegram WebApp initialized:", Telegram.WebApp);
-
-    
 
     function addToCart(product, quantity, price) {
         const productName = product.querySelector('h2').innerText;
