@@ -3,94 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин бадов</title>
+    <title>Каталог БАДов</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="background"></div> <!-- Фон добавлен здесь -->
-    <div class="container">
-        <div class="product" data-price="10">
-            <img src="BAD1.png" alt="Product 1">
-            <div class="info">
-                <h2>Тестостерон буст</h2>
-                <p>Повышает тестостерон</p>
-                <p class="price">Цена: $10</p>
-                <div class="quantity">
-                    <button class="minus">-</button>
-                    <input type="text" class="quantity-input" value="0">
-                    <button class="plus">+</button>
-                </div>
-                
-                <button class="details-btn">Подробнее</button>
-                <p class="details" style="display: none;">Полное описание товара...</p>
-                <button class="hide-btn" style="display: none;">Скрыть</button>
-            </div>
-        </div>
-        
-        <div class="product" data-price="15">
-            <img src="BAD3.jpg" alt="Product 2">
-            <div class="info">
-                <h2>Витамин D3</h2>
-                <p>Повышает витамин D3</p>
-                <p class="price">Цена: $15</p>
-                <div class="quantity">
-                    <button class="minus">-</button>
-                    <input type="text" class="quantity-input" value="0">
-                    <button class="plus">+</button>
-                </div>
-                <button class="details-btn">Подробнее</button>
-                <p class="details" style="display: none;">Полное описание товара...</p>
-                <button class="hide-btn" style="display: none;">Скрыть</button>
-            </div>
-        </div>
-        
-        <div class="product" data-price="20">
-            <img src="BAD2.jpg" alt="Product 3">
-            <div class="info">
-                <h2>Омега 3</h2>
-                <p>Рыбий жир</p>
-                <p class="price">Цена: $20</p>
-                <div class="quantity">
-                    <button class="minus">-</button>
-                    <input type="text" class="quantity-input" value="0">
-                    <button class="plus">+</button>
-                </div>
-                <button class="details-btn">Подробнее</button>
-                <p class="details" style="display: none;">Полное описание товара...</p>
-                <button class="hide-btn" style="display: none;">Скрыть</button>
-            </div>
-        </div>
-        
-        <div class="product" data-price="25">
-            <img src="BAD4.png" alt="Product 4">
-            <div class="info">
-                <h2>писька бобра</h2>
-                <p>хз чо придумать</p>
-                <p class="price">Цена: $25</p>
-                <div class="quantity">
-                    <button class="minus">-</button>
-                    <input type="text" class="quantity-input" value="0">
-                    <button class="plus">+</button>
-                </div>
-                <button class="details-btn">Подробнее</button>
-                <p class="details" style="display: none;">Полное описание товара...</p>
-                <button class="hide-btn" style="display: none;">Скрыть</button>
-            </div>
-        </div>
+    <h1>Каталог БАДов</h1>
+    <div class="product">
+        <img src="BAD1.png" alt="БАД 1">
+        <h2>БАД 1</h2>
+        <button class="order-btn" onclick="orderProduct('БАД 1')">Оформить заказ</button>
     </div>
-
-    <div class="cart">
-        <h2>Корзина</h2>
-        <ul class="cart-items">
-            <!-- Здесь будут добавляться товары -->
-        </ul>
-        <p class="total">Общая сумма: $0</p>
-        <button id="checkout-btn">Оформить заказ</button>
+    <div class="product">
+        <img src="BAD2.jpg" alt="БАД 2">
+        <h2>БАД 2</h2>
+        <button class="order-btn" onclick="orderProduct('БАД 2')">Оформить заказ</button>
     </div>
-
     <script src="script.js"></script>
-    
-
 </body>
 </html>
