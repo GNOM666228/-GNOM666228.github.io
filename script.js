@@ -66,7 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const orderData = prepareOrderData();
+        const orderData = prepareOrderData();  // Подготовка данных
+
+        // Отправка данных в Telegram бот
+        console.log("Order Data:", orderData);  // Добавьте это для проверки
+        Telegram.WebApp.sendData(JSON.stringify(orderData));  // Отправляем данные в бот
+
 
         // Отправка данных корзины в Telegram бот
         Telegram.WebApp.sendData(JSON.stringify(orderData));  // Отправляем данные в бот
@@ -97,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Произошла ошибка при оплате. Попробуйте снова.');
         });
     });
+    console.log("Telegram WebApp initialized:", Telegram.WebApp);
 
     
 
