@@ -1,9 +1,20 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #f50000; /* Белый текст на черном фоне */
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
     margin: 0;
     padding: 0;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('steel-texture.jpg') no-repeat center center/cover;
+    z-index: -1;
+    opacity: 0.8;
 }
 
 .container {
@@ -11,100 +22,79 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
+    z-index: 1; /* Ensure content is above background */
 }
 
 .product {
-    background-color: #ffffffab; /* Серебристый цвет для товара */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    margin: 15px;
-    padding: 15px;
-    width: 300px;
+    background-color: #333; /* Darker product background */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    margin: 20px;
+    padding: 20px;
+    width: 320px;
     text-align: center;
-    border-radius: 10px;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .product:hover {
-    transform: translateY(-5px); /* Анимация подъема товара при наведении */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
 }
 
 .product img {
     width: 100%;
     height: auto;
-    border-radius: 5px;
-}
-
-.info {
-    padding: 10px;
+    border-radius: 8px;
 }
 
 .info h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #ff6600; /* More masculine accent color */
 }
 
 .info p {
-    font-size: 14px;
-    color: #333; /* Цвет текста для описания товара */
+    font-size: 16px;
+    color: #ccc;
     margin-bottom: 15px;
 }
 
 .price {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-}
-
-.quantity {
-    margin-top: 10px;
-}
-
-.quantity-input {
-    width: 50px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 0 5px;
+    color: #ff6600;
 }
 
 button,
 .details-btn,
 .hide-btn {
-    background-color: #ff0000; /* Желтый цвет для кнопок */
+    background-color: #ff6600;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 18px;
+    margin: 6px 3px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 button:hover,
 .details-btn:hover,
 .hide-btn:hover {
-    background-color: #ffd633; /* Измененный цвет при наведении */
-    transform: scale(1.1); /* Увеличение размера кнопки при наведении */
-}
-
-button:active,
-.details-btn:active,
-.hide-btn:active {
-    background-color: #ffbf00; /* Измененный цвет при активации */
-    transform: translateY(1px);
+    background-color: #ff8533; 
+    transform: scale(1.15);
 }
 
 .cart {
-    background-color: #000; /* Черный фон для корзины */
-    color: #fff; /* Белый текст для корзины */
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
+    background-color: #444;
+    color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 25px;
 }
 
 .cart h2 {
@@ -124,15 +114,50 @@ button:active,
 }
 
 .total {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
 }
 
-.product .details {
-    display: none;
-    margin-top: 10px;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border: 1px solid #ccc;
+.quantity {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 2px solid #ff6600;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 0 10px;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    font-size: 18px;
+}
+
+button.minus,
+button.plus {
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button.minus:hover,
+button.plus:hover {
+    background-color: #ff8533;
+    transform: scale(1.15);
+}
+
+button.minus:active,
+button.plus:active {
+    background-color: #ff3300;
+    transform: translateY(2px);
 }
