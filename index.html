@@ -3,21 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог БАДов</title>
+    <title>Магазин бадов</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <h1>Каталог БАДов</h1>
-    <div class="product">
-        <img src="BAD1.png" alt="БАД 1">
-        <h2>БАД 1</h2>
-        <button class="order-btn" onclick="orderProduct('БАД 1')">Оформить заказ</button>
+    <div class="background"></div> <!-- Фон добавлен здесь -->
+    <div class="container">
+        <div class="product" data-price="10">
+            <img src="BAD1.png" alt="Product 1">
+            <div class="info">
+                <h2>Тестостерон буст</h2>
+                <p>Повышает тестостерон</p>
+                <p class="price">Цена: $10</p>
+                <div class="quantity">
+                    <button class="minus">-</button>
+                    <input type="text" class="quantity-input" value="0">
+                    <button class="plus">+</button>
+                </div>
+                <button class="details-btn">Подробнее</button>
+                <p class="details" style="display: none;">
+                    <strong>Тестостерон буст</strong> — это добавка, специально разработанная для повышения уровня тестостерона у мужчин. В состав входят натуральные ингредиенты, такие как экстракт трибулуса, цинк и витамин D3, которые способствуют улучшению физической выносливости, увеличению мышечной массы и поддержанию энергии на высоком уровне. Рекомендуется для мужчин старше 18 лет.
+                </p>
+                <button class="hide-btn" style="display: none;">Скрыть</button>
+            </div>
+        </div>
+        
+        <div class="product" data-price="15">
+            <img src="BAD3.jpg" alt="Product 2">
+            <div class="info">
+                <h2>Витамин D3</h2>
+                <p>Повышает витамин D3</p>
+                <p class="price">Цена: $15</p>
+                <div class="quantity">
+                    <button class="minus">-</button>
+                    <input type="text" class="quantity-input" value="0">
+                    <button class="plus">+</button>
+                </div>
+                <button class="details-btn">Подробнее</button>
+                <p class="details" style="display: none;">
+                    <strong>Витамин D3</strong> — это ключевой элемент для поддержания здоровья костей и иммунной системы. Эта добавка содержит 1000 IU витамина D3 в каждой капсуле, что помогает поддерживать оптимальный уровень этого витамина в организме. Идеально подходит для людей, которые испытывают недостаток солнечного света или имеют повышенные потребности в витамине D.
+                </p>
+                <button class="hide-btn" style="display: none;">Скрыть</button>
+            </div>
+        </div>
+        
+        <div class="product" data-price="20">
+            <img src="BAD2.jpg" alt="Product 3">
+            <div class="info">
+                <h2>Омега 3</h2>
+                <p>Рыбий жир</p>
+                <p class="price">Цена: $20</p>
+                <div class="quantity">
+                    <button class="minus">-</button>
+                    <input type="text" class="quantity-input" value="0">
+                    <button class="plus">+</button>
+                </div>
+                <button class="details-btn">Подробнее</button>
+                <p class="details" style="display: none;">
+                    <strong>Омега 3</strong> — это источник полиненасыщенных жирных кислот, необходимых для поддержания здоровья сердца, мозга и суставов. Этот продукт содержит высокую концентрацию EPA и DHA, двух основных типов омега-3, которые оказывают благоприятное воздействие на организм. Регулярное употребление способствует снижению уровня воспаления и поддержанию здорового уровня холестерина.
+                </p>
+                <button class="hide-btn" style="display: none;">Скрыть</button>
+            </div>
+        </div>
+        
+        <div class="product" data-price="25">
+            <img src="BAD4.png" alt="Product 4">
+            <div class="info">
+                <h2>писька бобра</h2>
+                <p>хз чо придумать</p>
+                <p class="price">Цена: $25</p>
+                <div class="quantity">
+                    <button class="minus">-</button>
+                    <input type="text" class="quantity-input" value="0">
+                    <button class="plus">+</button>
+                </div>
+                <button class="details-btn">Подробнее</button>
+                <p class="details" style="display: none;">
+                    <strong>писька бобра</strong> — уникальный продукт, созданный для истинных ценителей экзотики. В составе содержатся натуральные компоненты, известные своими мощными свойствами. Состав продукта помогает улучшить кровообращение, поддерживает мужскую силу и выносливость. Продукт исключительно натуральный и безопасный для употребления.
+                </p>
+                <button class="hide-btn" style="display: none;">Скрыть</button>
+            </div>
+        </div>
+        
+
+    <div class="cart">
+        <h2>Корзина</h2>
+        <ul class="cart-items">
+            <!-- Здесь будут добавляться товары -->
+        </ul>
+        <p class="total">Общая сумма: $0</p>
+        <button id="checkout-btn">Оформить заказ</button>
     </div>
-    <div class="product">
-        <img src="BAD2.jpg" alt="БАД 2">
-        <h2>БАД 2</h2>
-        <button class="order-btn" onclick="orderProduct('БАД 2')">Оформить заказ</button>
-    </div>
+
     <script src="script.js"></script>
+    
+
 </body>
 </html>
